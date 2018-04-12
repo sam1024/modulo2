@@ -57,7 +57,6 @@ $(function() {
   /**** ESTE FOR ES PARA CARGAR LOS DATOS DEL ARREGLO articulos EN LA PAGINA ****/
   for(i = 0; i < articulos.length; i++) {
     let precio = parseFloat(articulos[i].precio);
-    console.log(precio);
     $("#lst_articulos").append(
       `<div class="card">
         <img src=${articulos[i].foto} alt="">
@@ -83,6 +82,7 @@ $(function() {
 
 /**** ESTA FUNCION AGREGA LOS ELEMENTOS AL CARRITO ****/
 function addCart(id_articulo) {
+  $("#contenido").empty();
   let _arrArtTmp = [], art;
 
   /* CON EL METODO find DEL ARREGLO BUSCAMOS EL ARTICULO, ESTE METODO RECIBE COMO PARAMETRO UNA FUNCION,
@@ -105,11 +105,12 @@ function addCart(id_articulo) {
       let exist = _arrArtTmp.find(element => element.id == resultado.id);
       /**** SI EL ELEMENTO YA EXISTE EN EL CARRITO NO LO AGREGAMOS, SOLO ACTUALIZAMOS LA CANTIDAD ****/
       if (exist !== undefined) {
-        console.log("existe");
-        exist.cant += 1;
+        let cant = parseInt(exist.cant += 1);
+        let total = parseFloat(exist.precio) * cant;
+        exist.cant = cant;
+        exist.total = total;
       } else {
         /**** SI EL ELEMENTO NO EXISTE EN EL CARRITO LO AGREGAMOS ****/
-        console.log("No existe");
         _arrArtTmp.push(stringToJson(resultado.id, resultado.foto, resultado.descripcion, 1, resultado.precio));
       }
     } else {
@@ -130,25 +131,31 @@ let stringToJson = (id, foto, desc, cant, precio) => {
       foto: foto,
       desc: desc,
       cant: cant,
-      precio: precio
+      precio: precio,
+      total: precio
     }
   return _objJson;
 }
 
+/**************************************************************************************************/
+/************ ESTO MUESTRA LA VENTANA MODAL Y CARGA LOS DATOS EN LA MISMA *************************/
+/**************************************************************************************************/
 $("#num_items_cart").on("click", function() {
-  let _articulosTmp = JSON.parse(localStorage.getItem("articulo")), total = parseFloat("0"), precio;
+  let _articulosTmp = JSON.parse(localStorage.getItem("articulo")), total = parseFloat("0");
   for(let art of _articulosTmp) {
-    precio = parseFloat(art.precio);
+    //total = parseFloat(art.total);
     $("#contenido").append(
       `<div class="card" id="${art.id}">
-        <img src=${art.foto} /><p>${art.desc}<p><p class="precio">$ ${precio.toLocaleString()}</p>
+        <img src=${art.foto} />
+        <p>${art.desc}</p>
+        <p class="precio" id="total_art">$ ${parseFloat(art.total).toLocaleString()}</p>
         <div id="cantydel">
-        <input class="cantidad" type="number" value="${art.cant}" />
+        <input class="cantidad" id="cant${art.id}" type="number" value="${art.cant}" onchange="newCant(${art.id}, ${art.total})"/>
         <button class="btn_delete" onClick="removeItem(${art.id})">Eliminar</button>
       </div>
       </div>`
     );
-    total += parseFloat(art.precio);
+    total += parseFloat(art.total);
   }
   $("#contenido").append(
     `<div class="footer_modal">
@@ -166,4 +173,8 @@ function closeModal() {
 function removeItem(id) {
   console.log(`voy a quitar el id: ${id}`);
   $(`#${id}`).css("display", "none");
+}
+
+function newCant(id, total) {
+  console.log("Cantidad: " + $("#cant" + id).val() + " Total: " + total);
 }
