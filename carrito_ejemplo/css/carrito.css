@@ -1,0 +1,173 @@
+/*@import url("fuentes.css");*/
+/*@import "fuentes.css";*/
+
+html {
+  font-size: 15px;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  width: 100%;
+}
+
+header {
+  display: flex;
+  /*border: 1px solid red;*/
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #2C3E50;
+  color: #F0F3F4;
+}
+
+#icon_menu {
+  font-size: 2em;
+  margin: .3em;
+}
+#menu {
+  display: none;
+}
+
+#titulo {
+  font-size: 1.5em;
+}
+
+#div_carrito {
+  position: absolute;
+  right: .3em;
+}
+
+#num_items_cart {
+  font-size: 1.4em;
+  color: red;
+  position: absolute;
+  bottom: 1px;
+  right: 0.2em;
+  font-weight: bold;
+  text-align: center;
+  width: 1em;
+}
+
+#carrito {
+  /*position: absolute;*/
+  font-size: 1.9em;
+  margin-top: .8em;
+  right: .2em;
+}
+
+main {
+  margin-top: 4em;
+}
+
+.card {
+  margin: 0 0 .5em 0;
+}
+
+.descripcion {
+  font-size: 1.1em;
+  font-family: elmessiri;
+}
+
+.precio {
+  margin: -.7em 0 0.2em 0;
+  font-family: elmessiri;
+  font-size: 1.2em;
+  color: red;  
+}
+
+.btn_addcart {
+  display: block;
+  padding: .4em;
+  font-family: elmessiri;
+  font-size: 1.3em;
+  color: #fff;
+  background-color: #2980B9;
+  margin-left: .5em;
+  border: .1em #fff;
+  border-radius: .2em;
+  width: 98%;
+  margin: auto;
+}
+
+/*************************************************************************************************************************/
+/*********************************************** ESTILOS DE LA VENTANA MODAL *********************************************/
+/*************************************************************************************************************************/
+#modal {
+  position: absolute;
+  height: 100vh;
+  background: rgba(0, 0, 0, .8);
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  visibility: hidden;
+  opacity: 0; /* CON ESTO HACEMOS EL ELEMNTO TOTALMENTE INVISIBLE */
+}
+
+#modal > .container {
+  background-color: #fff;
+  width: 15em;
+  margin: 1em auto;
+  overflow: auto;
+  padding: 1em;
+  height: fit-content;
+}
+
+#modal > .container > .card {
+  border-bottom: .1em solid #EAEDED;
+  padding-bottom: .3em;
+}
+
+#modal > .container > .card > img {
+  width: 100px;
+  height: 4.5em;
+  float: left;
+}
+
+#modal > .container > .card > .precio {
+  margin: .1em;
+}
+
+#cantydel {
+  margin-top: 1em;
+}
+
+.cantidad {
+  width: 2em;
+  margin-left: .5em;
+}
+
+.btn_delete {
+  background-color: #EC1B03;
+  color: #fff;
+  padding: .2em 1em;
+  border: .1em solid;
+}
+
+#total {
+  font-size: 1.3em;
+}
+
+#btn_close {
+  /*position: absolute;
+  right: 3em;
+  top: 35em;*/
+  float: right;
+  margin: -.5em;
+  background-color: #21618C;
+  padding: .5em 1.1em;
+  font-size: 1.1em;
+  color: #fff;
+  border: .1em solid;
+}
+
+/*border: 1px solid;
+    position: relative;
+    width: 7.5em;
+    left: 8em;
+    top: -5em;*/
